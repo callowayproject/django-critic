@@ -36,6 +36,7 @@ class RatingManager(models.Manager):
             # then save the new option for the usr.
             if method.allow_change and data.option != opt:
                 data.option = opt
+                data.update = datetime.datetime.now()
                 data.save()
         except RatingData.DoesNotExist:
             # If no record was found, create a new one
