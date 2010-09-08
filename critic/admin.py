@@ -1,24 +1,18 @@
+"""
+django-critic model admin definitions
+"""
+
 from django.contrib import admin
-from critic.models import Instance, InstanceOption, InstanceOptionData
-from django.contrib.contenttypes.models import ContentType
-
-class InstanceAdmin(admin.ModelAdmin):
-    list_display = ('name', 'description', 'multiple', 'anonymous', 'created',)
-    ordering = ('name',)
-    search_fields = ('name', 'description',)
-    list_filter = ('multiple', 'anonymous',)
-    prepopulated_fields = {'slug': ('name',)}
+from critic.models import RatingData
     
-    
-class InstanceOptionAdmin(admin.ModelAdmin):
-    list_display = ('__unicode__',)
-    
-    
-class InstanceOptionDataAdmin(admin.ModelAdmin):
-    list_display = ('__unicode__', 'updated',)  
+class RatingDataAdmin(admin.ModelAdmin):
+    """
+    Model admin for rating data.
+    """
+    list_display = ('option', 'user', 'content_object', 'updated')  
     raw_id_fields = ('user',)
+    ordering = ('updated',)
+    list_filter = ('option',)
     
 
-admin.site.register(Instance, InstanceAdmin)
-admin.site.register(InstanceOption, InstanceOptionAdmin)
-admin.site.register(InstanceOptionData, InstanceOptionDataAdmin)
+admin.site.register(RatingData, RatingDataAdmin)
