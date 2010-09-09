@@ -1,0 +1,61 @@
+[
+	{
+		"pk": 1,
+		"model": "sample.sample",
+		"fields": {
+			"name": "Testing",
+			"something": 3}
+	}, 
+	{
+	    "pk": 1,
+	    "model": "sample.product",
+	    "fields": {
+	        "name": "My Product",
+	        "desc": "This is my awesome product, buy it."}
+	}, 
+	{
+        "pk": 1,
+        "model": "auth.user",
+        "fields": {
+            "username": "bob",
+            "first_name": "",
+            "last_name": "",
+            "is_active": true,
+            "is_superuser": true,
+            "is_staff": true,
+            "last_login": "2010-09-03 11:32:19",
+            "password": "sometypeofpasswordhere",
+            "email": "bob@bob.com",
+            "date_joined": "2010-09-03 11:32:19"}
+    }, 
+	{
+        "pk": 2,
+        "model": "auth.user",
+        "fields": {
+            "username": "jim",
+            "first_name": "",
+            "last_name": "",
+            "is_active": true,
+            "is_superuser": true,
+            "is_staff": true,
+            "last_login": "2010-09-03 11:32:19",
+            "password": "sometypeofpasswordhere",
+            "email": "jim@jim.com",
+            "date_joined": "2010-09-03 11:32:19"}
+    } , 
+	{
+        "pk": 3,
+        "model": "auth.user",
+        "fields": {
+            "username": "Jane",
+            "first_name": "",
+            "last_name": "",
+            "is_active": true,
+            "is_superuser": true,
+            "is_staff": true,
+            "last_login": "2010-09-03 11:32:19",
+            "password": "sometypeofpasswordhere",
+            "email": "Jane@Jane.com",
+            "date_joined": "2010-09-03 11:32:19"}
+    }
+]
