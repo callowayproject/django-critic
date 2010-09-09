@@ -22,10 +22,9 @@ class RatingManager(models.Manager):
         # Retreive the method and content type for the supplied instance.
         method = method_for_instance(obj)        
         ctype = ContentType.objects.get_for_model(obj)
-        
         # Check if obj and usr exist and if opt is a valid option.
-        if not obj or not usr or not opt in method.options:
-            return None
+        if not obj or not usr or not method or not opt in method.options:
+            return False
         
         try:
             # Get the RatingData instance for the supplied arguments
@@ -38,11 +37,13 @@ class RatingManager(models.Manager):
                 data.option = opt
                 data.update = datetime.datetime.now()
                 data.save()
+                return True
+            return False
         except RatingData.DoesNotExist:
             # If no record was found, create a new one
             data = self.create(content_type=ctype, object_id=obj.pk, 
                 user=usr, option=opt)
-        return data
+        return True
         
     def change(self, obj, usr, opt):
         """
@@ -51,7 +52,7 @@ class RatingManager(models.Manager):
         """
         return self.add(obj, usr, opt)
 
-    def user_option(self, obj, usr):
+    def user_rating(self, obj, usr):
         """
         Returns the option for the supplied user
         """

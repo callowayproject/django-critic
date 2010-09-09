@@ -36,7 +36,7 @@ def build_methods():
                 app_label, model = ct_string.split('.')
                 ctype = ContentType.objects.get(app_label__iexact=app_label, 
                     model__iexact=model)
-            except ContentType.DoesNotExist, Exception:
+            except Exception:
                 raise Exception(
                     "critic: %s is not a valid content type." % ct_string)
             
@@ -52,4 +52,5 @@ def build_methods():
             # Registrer method to model
             register(ctype.model_class(), 
                 critic_descriptor_attr=settings.RATING_ATTR)
+                
                 

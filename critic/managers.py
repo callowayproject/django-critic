@@ -29,11 +29,11 @@ class ModelRatingManager(models.Manager):
         """
         return RatingData.objects.change(self.instance, usr, opt)
         
-    def user_option(self, usr):
+    def user_rating(self, usr):
         """
         Retreive the selection the specified user made for the instance.
         """
-        return RatingData.objects.user_option(self.instance, usr)
+        return RatingData.objects.user_rating(self.instance, usr)
     
     @property
     def average(self):
