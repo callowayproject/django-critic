@@ -40,7 +40,8 @@ class RatingManager(models.Manager):
                 data.save()
         except RatingData.DoesNotExist:
             # If no record was found, create a new one
-            data = self.create(content_type=ctype, object_id=obj.pk, user=usr)
+            data = self.create(content_type=ctype, object_id=obj.pk, 
+                user=usr, option=opt)
         return data
         
     def change(self, obj, usr, opt):
@@ -72,7 +73,7 @@ class RatingManager(models.Manager):
         Returns the average rating for the supplied object.
         """
         ctype = ContentType.objects.get_for_model(obj)
-        return self.objects.filter(content_type__pk=ctype.pk,
+        return self.filter(content_type__pk=ctype.pk,
             object_id=obj.pk).aggregate(Avg('option'))['option__avg']
         
     def total(self, obj, opt=None):
@@ -88,7 +89,7 @@ class RatingManager(models.Manager):
         if opt in method.options:
             opt_kwargs = {'option': opt}
             
-        return self.objects.filter(content_type__pk=ctype.pk, 
+        return self.filter(content_type__pk=ctype.pk, 
             object_id=obj.pk, **opt_kwargs).aggregate(
                 Count('id'))['id__count']
         
@@ -98,7 +99,7 @@ class RatingData(models.Model):
     User data for a rating. Holds the object in which the user 
     has made a rating.
     """
-    user = models.ForeignKey(User, verbose_name=_('User'), null=True)
+    user = models.ForeignKey(User, verbose_name=_('User'))
     option = models.IntegerField()
     content_type = models.ForeignKey(ContentType, 
         verbose_name=_('Content Type'))
