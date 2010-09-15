@@ -2,6 +2,7 @@
 Custom managers for Django models registered with the critic application.
 """
 from django.db import models
+from django.contrib.contenttypes.models import ContentType
 
 from critic.models import RatingData
 from critic.modules import method_for_instance
@@ -13,9 +14,11 @@ class ModelRatingManager(models.Manager):
     instance = None
     def get_query_set(self):
         """
-        Default, return the manager.
+        Default queryset.
         """
-        return self
+        ctype = Content.objects.get_for_model(self.instance)
+        return RatingData.objects.filter(content_type_id=ctype.pk, 
+            object_id=self.instance.pk)
     
     def add(self, usr, opt):
         """
@@ -65,8 +68,7 @@ class ModelRatingManager(models.Manager):
                 perc = float(opt_total) / float(self.total)
                 
             return_data[str(opt)] = {
-                'percentage': perc, 
-                'percentage_rounded': int(perc * 100),
+                'percentage': int(perc * 100),
                 'total': opt_total}
                 
         return return_data
