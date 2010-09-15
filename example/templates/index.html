@@ -1,0 +1,35 @@
+{% load critic_tags %}
+<!DOCTYPE HTML>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<title>index</title>
+		<script src="/static/jquery-1.4.1.min.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript" charset="utf-8">
+			$(document).ready(function()
+		    {
+				$.ajax({
+					url:'{% critic_render_url obj2 %}',
+					success: function(data){
+						$('#box').html(data);
+					}
+				});
+		    });
+		</script>
+	</head>
+	<body>
+		<h2>Sample Ajax</h2>
+		<div id="box"></div>
+		<hr/>
+		<h2>Template Tag</h2>
+		{% critic_render obj1 %}
+		<hr/>
+		<h2>Disriptor</h2>
+		The average rating for <em>"{{ obj2 }}"</em> is {{ obj2.ratings.average }}, 
+		out of {{ obj2.ratings.total }} rating(s)
+		<hr/>
+		<h2>Render URL ( for ajax )</h2>
+		{% critic_render_url obj1 %}<br/>
+		{% critic_render_url obj2 %}
+	</body>
+</html>
