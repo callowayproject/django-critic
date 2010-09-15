@@ -56,18 +56,15 @@ class RatingManager(models.Manager):
         """
         Returns the option for the supplied user
         """
-        extra_kwargs = {}
-
         if not obj or not usr:
             return None
         
         ctype = ContentType.objects.get_for_model(obj)
         try:
             return self.get(content_type__pk=ctype.pk, object_id=obj.pk,
-                **extra_kwargs).option
+                user__pk=usr.pk).option
         except RatingData.DoesNotExist:
             return None
-        
     
     def average(self, obj):
         """
