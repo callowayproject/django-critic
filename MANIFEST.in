@@ -1,0 +1,10 @@
+include AUTHORS
+include LICENSE
+include NOTICE
+include README
+include requirements.txt
+
+recursive-include doc_src *.rst *.html *.css *.js *.png *.gif
+recursive-include docs *.html *.css *.js *.png *.gif
+
+recursive-include critic *.py
