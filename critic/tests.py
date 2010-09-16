@@ -8,6 +8,9 @@ from django.contrib.auth.models import User
 from sample.models import Sample, Product
 from critic.models import RatingData
 
+from critic.modules import build_methods
+build_methods()
+
 class CriticTestCase(TestCase):
     """
     The main tests for django-critic.
@@ -28,13 +31,13 @@ class CriticTestCase(TestCase):
         This test will ensure adding a rating works.
         """
         # This will test to make sure adding a rating works.
-        self.assertTrue(RatingData.objects.add(self.sample, self.bob, 0))
-        
-        # This will test changing a user's rating
         self.assertTrue(RatingData.objects.add(self.sample, self.bob, 1))
         
+        # This will test changing a user's rating
+        self.assertTrue(RatingData.objects.add(self.sample, self.bob, 2))
+        
         # This should not allow a option that is not a valid choice.
-        self.assertFalse(RatingData.objects.add(self.sample, self.bob, 2))
+        self.assertFalse(RatingData.objects.add(self.sample, self.bob, 3))
         
         # This should be false if no user is supplied.
         self.assertFalse(RatingData.objects.add(self.sample, None, 1))

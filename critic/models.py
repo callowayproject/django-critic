@@ -107,8 +107,4 @@ class RatingData(models.Model):
         default=datetime.datetime.now)
     
     objects = RatingManager()
-            
-       
-# Build the methods     
-from critic.modules import build_methods
-build_methods()
+    

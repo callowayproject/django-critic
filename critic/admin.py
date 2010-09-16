@@ -16,3 +16,7 @@ class RatingDataAdmin(admin.ModelAdmin):
     
 
 admin.site.register(RatingData, RatingDataAdmin)
+
+# Build the methods     
+from critic.modules import build_methods
+build_methods()
