@@ -17,7 +17,7 @@ setup(
     description = 'A rating application.',
     author = 'Jose Soares',
     author_email = 'jsoares@washingtontimes.com',
-    url = 'http://opensource.washingtontimes.com/projects/critic/',
+    url = 'http://github.com/josesoa/django-critic',
     packages = find_packages(),
     include_package_data = True,
     install_requires = REQS,
