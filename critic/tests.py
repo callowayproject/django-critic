@@ -3,13 +3,32 @@ django-critic: tests
 """
 
 from django.test import TestCase
-
+from django.db import models
 from django.contrib.auth.models import User
-from sample.models import Sample, Product
 from critic.models import RatingData
 
-from critic.modules import build_methods
-build_methods()
+class TestSample(models.Model):
+    name = models.TextField()
+    something = models.IntegerField(default=1)
+    
+    def __unicode__(self):
+        return self.name
+        
+class TestProduct(models.Model):
+    name = models.CharField(max_length=20)
+    desc = models.TextField()
+    
+    def __unicode__(self):
+        return self.name
+
+from critic.modules import METHODS, Method
+
+# Setup up the methods.
+METHODS['critic.testsample'] = Method(
+    name="Up/Down", options=[1,2], change=True)
+    
+METHODS['critic.testproduct'] = Method(
+    name="5 Star", options=[1,2,3,4,5], change=False)
 
 class CriticTestCase(TestCase):
     """
@@ -20,8 +39,8 @@ class CriticTestCase(TestCase):
         """
         Set up some initial data.
         """
-        self.sample = Sample.objects.get(pk=1)
-        self.product = Product.objects.get(pk=1)
+        self.sample = TestSample.objects.create(name="Testing")
+        self.product = TestProduct.objects.create(name="My Product")
         self.bob = User.objects.get(pk=1)
         self.jim = User.objects.get(pk=2)
         self.jane = User.objects.get(pk=3)

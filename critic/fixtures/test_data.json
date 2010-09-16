@@ -1,19 +1,5 @@
 [
 	{
-		"pk": 1,
-		"model": "sample.sample",
-		"fields": {
-			"name": "Testing",
-			"something": 3}
-	}, 
-	{
-	    "pk": 1,
-	    "model": "sample.product",
-	    "fields": {
-	        "name": "My Product",
-	        "desc": "This is my awesome product, buy it."}
-	}, 
-	{
         "pk": 1,
         "model": "auth.user",
         "fields": {
