@@ -38,7 +38,9 @@ Module Keys
 	* Format expected is 'app.model'.
 * **options** - This is a list of Integers of all the options a user can select.
 * **allow_change** - True|False, Optional, will allow user to change their rating
-	* If not specified :ref:`setting_allow_change` will be used
+	* If not specified :ref:`setting_allow_change` will be used.
+* **template** - String, location of the template to use for the content_types.
+	* If not specified :ref:`setting_default_template` will be used.
 
 .. _setting_allow_change:
 
@@ -47,6 +49,13 @@ CRITIC_ALLOW_CHANGE
 
 True|False, used as a default value to determine if a user can change 
 their rating for a object.
+
+.. _setting_default_template:
+
+CRITIC_DEFAULT_RENDER_TEMPLATE
+******************************
+
+The location of the default template. Default location is 'critic/render.html'
 
 .. _setting_rating_attribute:
 

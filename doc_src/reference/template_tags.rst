@@ -3,6 +3,8 @@
 Template Tags
 =============
 
+.. _templatetag_user_rating:
+
 critic_user_rating
 ******************
 
@@ -22,6 +24,7 @@ Retrieves the user's rating for a specified object
 
 	You have rated this story a {{ user_rating }}
 	
+.. _templatetag_render:
 	
 critic_render
 *************
@@ -39,6 +42,8 @@ Renders some template for a specific object.
 .. code-block:: django
 
     {% critic_render entry %}
+
+.. _templatetag_render_url:
 
 critic_render_url
 *****************
@@ -59,8 +64,6 @@ This is simply here for convenience.
 	{% critic_render_url [object] %}
 	
 **Output Example**
-
-
 
 .. code-block:: html
 

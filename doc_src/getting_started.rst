@@ -8,7 +8,7 @@ If you haven't installed django-critic yet please visit the
 
 
 Basic settings
-##############
+**************
 
 The main setting you will use is :ref:`setting_rating_methods`. This is a 
 tuple of dictionaries that tells django-critic what models will be 
@@ -22,7 +22,8 @@ Here is a basic example
 		{'name': 'A Simple Up/Down Rating System',
 		 'content_types': ['blog.entry'],
 		 'options': [1, 2],
-		 'allow_change': False,
+		 'allow_change': True,
+		 'template': 'mypath/entry_critic.html'
 		},
 	)
 	
@@ -30,27 +31,10 @@ This sets up blog.entry to be rated upon in a Up/Down fashion. You can
 specify multiple content types for a rating method, but you cannot specify 
 the same content type for multiple rating methods.
 
-**Bad**
-
-.. code-block:: python
-
-	CRITIC_RATING_METHODS = (
-		{'name': 'A Simple Up/Down Rating System',
-		 'content_types': ['blog.entry', 'stories.story'],
-		 'options': [1, 2],
-		 'allow_change': False,
-		},
-		{'name': '5 Star Rating System',
-		 'content_types': ['blog.entry'],
-		 'options': [1, 2, 3, 4 ,5],
-		 'allow_change': False,
-		},
-	)
-
-
 These 3 keys, 'name', 'content_types' and 'options' are the only required 
-keys for django-critic to function. 'allow_change' is optional, 
-and if it is not specified :ref:`setting_allow_change` will be used.
+keys for django-critic to function. 'allow_change' and 'template' are optional, 
+and if neither of these are not specified :ref:`setting_allow_change` or 
+:ref:`setting_default_template` will be used respectfully.
 
 See more information about this setting: :ref:`setting_rating_methods`
 
@@ -58,77 +42,120 @@ A rating descriptor is also added to the models specified, by default the
 name of the attribute is 'ratings'. The name can be changed using the 
 :ref:`setting_rating_attribute`.
 
-Adding ratings
-##############
-
-You can add ratings by using the model manager or the rating descriptor.
-
-Here is an example of using the RatingManager
-
-.. code-block:: python
-
-	RatingData.objects.add(obj, usr, opt)
-	
-`add` will return True|False if the rating was added successfully.
-
-Here is an example of using the descriptor. 
-
-.. code-block:: python
-
-	from blog.models import Entry
-	
-	e = Entry.objects.get(pk=1)
-	e.ratings.add(usr, opt)
-	
-You can also use the change method to modify a users rating. View the 
-:ref:`api` page for more details.
-	
-
-
-Displaying
-##########
-
-Now you can simply use the :ref:`templatetag_render` template tag.
-
-.. code-block:: django
-
-	{% critic_render entry %}
-	
-Template
-********
+Create the template
+*******************
 
 The template that is render is something you will need to create, the 
 default template is blank.
+
+The template that is retrieved follows this process:
+
+#. Check for existance of a template that is specified in :ref:`setting_rating_methods` for a particular object.
+#. Check for existance of critic/<app>__<model>.html for a particular object.
+#. Use critic/render.html if all else fails. 
 
 Since you will know what your rating method does, the template can be 
 custom made to your needs.
 
 For example: If we wanted to create a template for the rating method we 
 specified above, you know there is going to be 2 options and therefore 
-we can have a select box with 2 options, one for up one for down. So your 
-template could look something like this...
+we can have a select box with 2 options, one for up one for down. We also 
+know that you can change your rating so there is no need to check if you  
+have already rated. Your template could look something like this...
 
 .. code-block:: django
 
-	<form id="{{ instance.pk }}" action="/critic/add/" method="get" accept-charset="utf-8">
+	<form action="{% url critic_add_rating %}" method="POST">
 		<select name="option" id="option">
 			<option value="1" {% ifequal user_rating 1 %}selected=True{% endifequal %}>Up</option>
 			<option value="2" {% ifequal user_rating 2 %}selected=True{% endifequal %}>Down</option>
 		</select>
 		<input type="hidden" name="content_type_id" value="{{ content_type_id }}">
-		<input type="hidden" name="object_id" value="{{ instance.pk }}">
+		<input type="hidden" name="object_id" value="{{ obj.pk }}">
 		<input type="submit" name="submit" value="GO">
 	</form>
-	{% if user_rating %}
-		Average: {{ average }}<br/>
-		Total: {{ total }}
-	{% endif %}
+	Average: {{ average }}<br/>
+	Total: {{ total }}
 	
+Template context
+----------------
+
+Which ever template gets rendered, you will have the following variables 
+available in the context:
+
+* **user_rating** - the rating the user has selected.
+* **content_type_id** - the content type id of the object
+* **obj** - the object
+* **method** - the 'critic.modules.Method' instance for the object
+* **average** - average rating for the object
+* **total** - the total ratings for the object
+
+Render the template
+-------------------
+
+You can use the template tag :ref:`templatetag_render` to render the template.
+
+.. code-block:: django
+
+	{% load critic_tags %}
+	
+	{% critic_render obj %}
+
+Retrieve rating data via urls
+*****************************
+
+You can also retrieve the user rating and rating data for an object via a url. 
+The output is in JSON format.
+
+* user_rating/**<content_type_id>**/**<object_id>**/
+	* Example Output: {"user_rating": 1}
+* data/**<content_type_id>**/**<object_id>**/**<option>**/
+	* Example Output: {"average": 3.0, "total": 1, "average_rounded": 3}
+* data/**<content_type_id>**/**<object_id>**/
+	* Example Output: {"average": 3.0, "total": 1, "average_rounded": 3}
+	
+Render via url
+--------------
+
+This will render your template the same way :ref:`templatetag_render` does
+
+* render/**<content_type_id>**/**<object_id>**/
+
+**Example**
+
+Using JQuery to load the rating template via ajax
+
+.. code-block:: javascript
+
+	$(document).ready(function(){
+		$.ajax({
+			url:'{% critic_render_url obj2 %}',
+			success: function(data){
+				$('#box').html(data);
+			}
+		});
+	});
+
 .. note::
 
-	The render method will give you, "instance", "content_type_id", "method"
-	and "user_rating" in the context.
-	
-	When adding a rating, the view will expect 'option', 'content_type_id' and 'object_id' from
-	either POST or GET.
+	The template tag :ref:`templatetag_render_url` will retrieve the url 
+	needed to render the object specified
 
+Add ratings
+***********
+
+The `add` view expects the following in the request.POST. Is also expects 
+a logged in user.
+
+* content_type_id
+* object_id
+* option
+
+You can reverse the add url for form posting.
+
+.. code-block:: django
+
+	{% url critic_add_rating %}
+	/critic/add/
+	
+	
