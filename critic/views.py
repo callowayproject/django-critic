@@ -17,8 +17,11 @@ POST_ADD_FIELDS = ['content_type_id', 'object_id', 'option']
 @never_cache
 def add_rating(request, redirect_field_name='next'):
     """
-    Add a user rating. Can be send via POST or GET.
+    Add a user rating. Needs to be sent via POST.
     """
+    if not request.method == 'POST':
+        raise Http404
+    
     if request.is_ajax():
         # Return a normal HttpResponse if the request is ajax.
         response = HttpResponse()
@@ -28,11 +31,8 @@ def add_rating(request, redirect_field_name='next'):
         # Redirect to next_url if this is a normal request.
         response = HttpResponseRedirect(next_url)
     
-    # The reuqset method can be either POST or GET
-    if request.method == 'POST':
-        data_dict = request.POST
-    else:
-        data_dict = request.GET
+    # Retreive the data.
+    data_dict = request.POST
     
     try:
         # Retrieve three values from either the POST or GET.
