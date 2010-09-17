@@ -7,7 +7,7 @@ from django.template.loader import get_template, render_to_string
 
 from critic.modules import method_for_instance
 
-def render(obj, template=None, **extra_context):
+def render(obj, **extra_context):
     t = None
     try:
         ct = ContentType.objects.get_for_model(obj)
@@ -19,13 +19,14 @@ def render(obj, template=None, **extra_context):
     app = ct.app_label.lower()
        
     try:
-        # Retreive the template specified
-        t = get_template(template)
+        # Retreive the template from the method.
+        t = get_template(method.template)
     except:
         try:
             # Retrieve the template based of off the content object
             t = get_template('critic/%s__%s.html' % (app, model)) 
         except:
+            # Use the default if no template was found.
             t = get_template('critic/render.html')
             
     if not t: 
@@ -34,7 +35,7 @@ def render(obj, template=None, **extra_context):
     # The conext that will be passed to the rendered template.
     from critic.models import RatingData
     context = {
-        'instance': obj, 
+        'obj': obj, 
         'method': method, 
         'content_type_id': ct.pk,
         'average': RatingData.objects.average(obj),
