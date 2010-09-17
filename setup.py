@@ -18,7 +18,7 @@ setup(
     author = 'Jose Soares',
     author_email = 'jsoares@washingtontimes.com',
     url = 'http://github.com/josesoa/django-critic',
-    packages = find_packages(),
+    packages = ['critic', 'critic.templatetags'],
     include_package_data = True,
     install_requires = REQS,
     classifiers = [
