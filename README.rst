@@ -69,8 +69,6 @@ keys for django-critic to function. 'allow_change' and 'template' are optional,
 and if neither of these are not specified `CRITIC_ALLOW_CHANGE` or 
 `CRITIC_DEFAULT_TEMPLATE` will be used respectfully.
 
-See more information about this setting: `CRITIC_RATING_METHODS`
-
 A rating descriptor is also added to the models specified, by default the 
 name of the attribute is 'ratings'. The name can be changed using the 
 `CRITIC_RATING_ATTRIBUTE`.
