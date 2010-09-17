@@ -172,7 +172,7 @@ Using JQuery to load the rating template via ajax
 
 **NOTE**
 
-	The template tag `CRITIC_RENDER_URL` will retrieve the url 
+	The template tag `critic_render_url` will retrieve the url 
 	needed to render the object specified
 
 Add ratings
