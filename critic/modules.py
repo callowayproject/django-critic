@@ -5,13 +5,17 @@ from django.contrib.contenttypes.models import ContentType
 from critic import settings, register
 
 # Holds the valid keys for the method definitions.
-VALID_KEYS = ['name', 'options', 'allow_change', 'content_types']
+VALID_KEYS = ['name', 'options', 'allow_change', 'content_types', 'template']
 # Holds the rating method details
 METHODS = {}
 
 class Method(object):
-    def __init__(self, name, options, change):
-        self.name, self.options, self.allow_change = name, options, change
+    """
+    Simple object that holds the method details
+    """
+    def __init__(self, name, options, change, template=None):
+        self.name, self.options = name, options
+        self.allow_change, self.template = change, template
         
 
 def method_for_instance(instance):
@@ -47,7 +51,8 @@ def build_methods():
             METHODS[ct_string] = Method(
                 name=method.get('name', ''), 
                 options=method.get('options', []),
-                change=method.get('allow_change', settings.ALLOW_CHANGE))
+                change=method.get('allow_change', settings.ALLOW_CHANGE),
+                template=method.get('template', None))
                 
             # Registrer method to model
             register(ctype.model_class(), 
