@@ -1,0 +1,150 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Template Tags &mdash; django-critic v0.2.1 documentation</title>
+    <link rel="stylesheet" href="../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '0.2.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="django-critic v0.2.1 documentation" href="../index.html" />
+    <link rel="up" title="Reference" href="index.html" />
+    <link rel="prev" title="API" href="api.html" /> 
+  </head>
+  <body>
+<div id="docstitle">
+	<p>django-critic v0.2.1 documentation</p>
+</div>
+<div id="header">
+	<div id="title"><h1>Template Tags</h1></div>
+	<ul id="headerButtons">
+		<li id="toc_button"><div class="headerButton"><a href="#">Table of Contents</a></div></li>
+		<li id="page_buttons">
+			<div class="headerButton"><a href="../genindex.html" title="General Index" accesskey="I">index</a></div>
+			<div class="headerButton"><a href="api.html" title="API" accesskey="P">previous</a></div>
+		</li>
+	</ul>
+</div>
+
+<div id="sphinxsidebar">
+  <div class="sphinxsidebarwrapper">
+	<ul><li class="toctree-l1"><a href="../index.html">Main Page</a></li></ul>
+	<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started.html">Getting Started</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Reference</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="settings.html">Settings</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html">API</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="">Template Tags</a></li>
+</ul>
+</li>
+</ul>
+
+    <div id="searchbox" style="display: none">
+      
+        <form class="search" action="../search.html" method="get">
+			<div class="search-wrapper">
+			<span class="search-left"></span>
+			<input class="prettysearch" type="text" name="q" size="18" />
+			<span class="search-right">&nbsp;</span>
+			</div>
+          <input type="submit" value="Search" class="searchbutton" />
+          <input type="hidden" name="check_keywords" value="yes" />
+          <input type="hidden" name="area" value="default" />
+        </form>
+        <p class="searchtip" style="font-size: 90%">
+        Enter search terms or a module, class or function name.
+        </p>
+    </div>
+    <script type="text/javascript">$('#searchbox').show(0);</script>
+  </div>
+</div>
+
+
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="template-tags">
+<span id="templatetags"></span><h1>Template Tags<a class="headerlink" href="#template-tags" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="critic-user-rating">
+<span id="templatetag-user-rating"></span><h2>critic_user_rating<a class="headerlink" href="#critic-user-rating" title="Permalink to this headline">¶</a></h2>
+<p>Retrieves the user&#8217;s rating for a specified object</p>
+<p><strong>Syntax</strong></p>
+<div class="highlight-django"><div class="highlight"><pre><span class="cp">{%</span> <span class="k">critic_user_rating</span> <span class="o">[</span><span class="nv">object</span><span class="o">]</span> <span class="k">as</span> <span class="o">[</span><span class="nv">varname</span><span class="o">]</span> <span class="cp">%}</span><span class="x"></span>
+</pre></div>
+</div>
+<p><strong>Example</strong></p>
+<div class="highlight-django"><div class="highlight"><pre><span class="cp">{%</span> <span class="k">critic_user_rating</span> <span class="nv">story</span> <span class="k">as</span> <span class="nv">user_rating</span> <span class="cp">%}</span><span class="x"></span>
+
+<span class="x">    You have rated this story a </span><span class="cp">{{</span> <span class="nv">user_rating</span> <span class="cp">}}</span><span class="x"></span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="critic-render">
+<span id="templatetag-render"></span><h2>critic_render<a class="headerlink" href="#critic-render" title="Permalink to this headline">¶</a></h2>
+<p>Renders some template for a specific object.</p>
+<p><strong>Syntax</strong></p>
+<div class="highlight-django"><div class="highlight"><pre><span class="cp">{%</span> <span class="k">critic_render</span> <span class="o">[</span><span class="nv">object</span><span class="o">]</span> <span class="cp">%}</span><span class="x"></span>
+</pre></div>
+</div>
+<p><strong>Example</strong></p>
+<div class="highlight-django"><div class="highlight"><pre><span class="cp">{%</span> <span class="k">critic_render</span> <span class="nv">entry</span> <span class="cp">%}</span><span class="x"></span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="critic-render-url">
+<span id="templatetag-render-url"></span><h2>critic_render_url<a class="headerlink" href="#critic-render-url" title="Permalink to this headline">¶</a></h2>
+<p>When given a object, a url for rendering the rating method will be returned.
+This is simply here for convenience.</p>
+<p><strong>Syntax</strong></p>
+<div class="highlight-django"><div class="highlight"><pre><span class="cp">{%</span> <span class="k">critic_render_url</span> <span class="o">[</span><span class="nv">object</span><span class="o">]</span> <span class="cp">%}</span><span class="x"></span>
+</pre></div>
+</div>
+<p><strong>Example</strong></p>
+<div class="highlight-django"><div class="highlight"><pre><span class="cp">{%</span> <span class="k">critic_render_url</span> <span class="o">[</span><span class="nv">object</span><span class="o">]</span> <span class="cp">%}</span><span class="x"></span>
+</pre></div>
+</div>
+<p><strong>Output Example</strong></p>
+<div class="highlight-html"><div class="highlight"><pre>/critic/render/11/2/
+</pre></div>
+</div>
+</div>
+</div>
+
+
+          </div> 
+        </div>
+      </div>
+    <div class="footer">
+    <p>
+      &copy; Copyright 2010, The Washington Times.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.0.3.
+	</p>
+    </div>
+      <div class="clearer"></div>
+    </div>
+	<div id="breadcrumbs">
+		<a href="index.html" accesskey="U">Reference</a><img src="../_static/triangle_closed.png" height="9" width="9" alt="&gt;">
+		Template Tags
+		</ul>
+	</div>
+	<script type="text/javascript" charset="utf-8" src="../_static/toc.js"></script>
+  </body>
+</html>

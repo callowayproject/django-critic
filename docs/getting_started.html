@@ -1,0 +1,261 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Getting Started &mdash; django-critic v0.2.1 documentation</title>
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '0.2.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="django-critic v0.2.1 documentation" href="index.html" />
+    <link rel="next" title="Reference" href="reference/index.html" />
+    <link rel="prev" title="Installation" href="installation.html" /> 
+  </head>
+  <body>
+<div id="docstitle">
+	<p>django-critic v0.2.1 documentation</p>
+</div>
+<div id="header">
+	<div id="title"><h1>Getting Started</h1></div>
+	<ul id="headerButtons">
+		<li id="toc_button"><div class="headerButton"><a href="#">Table of Contents</a></div></li>
+		<li id="page_buttons">
+			<div class="headerButton"><a href="genindex.html" title="General Index" accesskey="I">index</a></div>
+			<div class="headerButton"><a href="reference/index.html" title="Reference" accesskey="N">next</a></div>
+			<div class="headerButton"><a href="installation.html" title="Installation" accesskey="P">previous</a></div>
+		</li>
+	</ul>
+</div>
+
+<div id="sphinxsidebar">
+  <div class="sphinxsidebarwrapper">
+	<ul><li class="toctree-l1"><a href="index.html">Main Page</a></li></ul>
+	<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="">Getting Started</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#basic-settings">Basic settings</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#create-the-template">Create the template</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#retrieve-rating-data-via-urls">Retrieve rating data via urls</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#add-ratings">Add ratings</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="reference/index.html">Reference</a></li>
+</ul>
+
+    <div id="searchbox" style="display: none">
+      
+        <form class="search" action="search.html" method="get">
+			<div class="search-wrapper">
+			<span class="search-left"></span>
+			<input class="prettysearch" type="text" name="q" size="18" />
+			<span class="search-right">&nbsp;</span>
+			</div>
+          <input type="submit" value="Search" class="searchbutton" />
+          <input type="hidden" name="check_keywords" value="yes" />
+          <input type="hidden" name="area" value="default" />
+        </form>
+        <p class="searchtip" style="font-size: 90%">
+        Enter search terms or a module, class or function name.
+        </p>
+    </div>
+    <script type="text/javascript">$('#searchbox').show(0);</script>
+  </div>
+</div>
+
+
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="getting-started">
+<span id="id1"></span><h1>Getting Started<a class="headerlink" href="#getting-started" title="Permalink to this headline">¶</a></h1>
+<p>If you haven&#8217;t installed django-critic yet please visit the
+<a class="reference internal" href="installation.html#installation"><em>Installation</em></a> page to do so.</p>
+<div class="section" id="basic-settings">
+<h2>Basic settings<a class="headerlink" href="#basic-settings" title="Permalink to this headline">¶</a></h2>
+<p>The main setting you will use is <a class="reference internal" href="reference/settings.html#setting-rating-methods"><em>CRITIC_RATING_METHODS</em></a>. This is a
+tuple of dictionaries that tells django-critic what models will be
+ratable and some extra arguments about the rating method.</p>
+<p>Here is a basic example</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">CRITIC_RATING_METHODS</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="p">{</span><span class="s">&#39;name&#39;</span><span class="p">:</span> <span class="s">&#39;A Simple Up/Down Rating System&#39;</span><span class="p">,</span>
+         <span class="s">&#39;content_types&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s">&#39;blog.entry&#39;</span><span class="p">],</span>
+         <span class="s">&#39;options&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span>
+         <span class="s">&#39;allow_change&#39;</span><span class="p">:</span> <span class="bp">True</span><span class="p">,</span>
+         <span class="s">&#39;template&#39;</span><span class="p">:</span> <span class="s">&#39;mypath/entry_critic.html&#39;</span>
+        <span class="p">},</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p>This sets up blog.entry to be rated upon in a Up/Down fashion. You can
+specify multiple content types for a rating method, but you cannot specify
+the same content type for multiple rating methods.</p>
+<p>These 3 keys, &#8216;name&#8217;, &#8216;content_types&#8217; and &#8216;options&#8217; are the only required
+keys for django-critic to function. &#8216;allow_change&#8217; and &#8216;template&#8217; are optional,
+and if neither of these are not specified <a class="reference internal" href="reference/settings.html#setting-allow-change"><em>CRITIC_ALLOW_CHANGE</em></a> or
+<a class="reference internal" href="reference/settings.html#setting-default-template"><em>CRITIC_DEFAULT_RENDER_TEMPLATE</em></a> will be used respectfully.</p>
+<p>See more information about this setting: <a class="reference internal" href="reference/settings.html#setting-rating-methods"><em>CRITIC_RATING_METHODS</em></a></p>
+<p>A rating descriptor is also added to the models specified, by default the
+name of the attribute is &#8216;ratings&#8217;. The name can be changed using the
+<a class="reference internal" href="reference/settings.html#setting-rating-attribute"><em>CRITIC_RATING_ATTRIBUTE</em></a>.</p>
+</div>
+<div class="section" id="create-the-template">
+<h2>Create the template<a class="headerlink" href="#create-the-template" title="Permalink to this headline">¶</a></h2>
+<p>The template that is render is something you will need to create, the
+default template is blank.</p>
+<p>The template that is retrieved follows this process:</p>
+<ol class="arabic simple">
+<li>Check for existance of a template that is specified in <a class="reference internal" href="reference/settings.html#setting-rating-methods"><em>CRITIC_RATING_METHODS</em></a> for a particular object.</li>
+<li>Check for existance of critic/&lt;app&gt;__&lt;model&gt;.html for a particular object.</li>
+<li>Use critic/render.html if all else fails.</li>
+</ol>
+<p>Since you will know what your rating method does, the template can be
+custom made to your needs.</p>
+<p>For example: If we wanted to create a template for the rating method we
+specified above, you know there is going to be 2 options and therefore
+we can have a select box with 2 options, one for up one for down. We also
+know that you can change your rating so there is no need to check if you
+have already rated. Your template could look something like this...</p>
+<div class="highlight-django"><div class="highlight"><pre><span class="x">&lt;form action=&quot;</span><span class="cp">{%</span> <span class="k">url</span> <span class="nv">critic_add_rating</span> <span class="cp">%}</span><span class="x">&quot; method=&quot;POST&quot;&gt;</span>
+<span class="x">        &lt;select name=&quot;option&quot; id=&quot;option&quot;&gt;</span>
+<span class="x">                &lt;option value=&quot;1&quot; </span><span class="cp">{%</span> <span class="k">ifequal</span> <span class="nv">user_rating</span> <span class="m">1</span> <span class="cp">%}</span><span class="x">selected=True</span><span class="cp">{%</span> <span class="k">endifequal</span> <span class="cp">%}</span><span class="x">&gt;Up&lt;/option&gt;</span>
+<span class="x">                &lt;option value=&quot;2&quot; </span><span class="cp">{%</span> <span class="k">ifequal</span> <span class="nv">user_rating</span> <span class="m">2</span> <span class="cp">%}</span><span class="x">selected=True</span><span class="cp">{%</span> <span class="k">endifequal</span> <span class="cp">%}</span><span class="x">&gt;Down&lt;/option&gt;</span>
+<span class="x">        &lt;/select&gt;</span>
+<span class="x">        &lt;input type=&quot;hidden&quot; name=&quot;content_type_id&quot; value=&quot;</span><span class="cp">{{</span> <span class="nv">content_type_id</span> <span class="cp">}}</span><span class="x">&quot;&gt;</span>
+<span class="x">        &lt;input type=&quot;hidden&quot; name=&quot;object_id&quot; value=&quot;</span><span class="cp">{{</span> <span class="nv">obj.pk</span> <span class="cp">}}</span><span class="x">&quot;&gt;</span>
+<span class="x">        &lt;input type=&quot;submit&quot; name=&quot;submit&quot; value=&quot;GO&quot;&gt;</span>
+<span class="x">&lt;/form&gt;</span>
+<span class="x">Average: </span><span class="cp">{{</span> <span class="nv">average</span> <span class="cp">}}</span><span class="x">&lt;br/&gt;</span>
+<span class="x">Total: </span><span class="cp">{{</span> <span class="nv">total</span> <span class="cp">}}</span><span class="x"></span>
+</pre></div>
+</div>
+<div class="section" id="template-context">
+<h3>Template context<a class="headerlink" href="#template-context" title="Permalink to this headline">¶</a></h3>
+<p>Which ever template gets rendered, you will have the following variables
+available in the context:</p>
+<ul class="simple">
+<li><strong>user_rating</strong> - the rating the user has selected.</li>
+<li><strong>content_type_id</strong> - the content type id of the object</li>
+<li><strong>obj</strong> - the object</li>
+<li><strong>method</strong> - the &#8216;critic.modules.Method&#8217; instance for the object</li>
+<li><strong>average</strong> - average rating for the object</li>
+<li><strong>total</strong> - the total ratings for the object</li>
+</ul>
+</div>
+<div class="section" id="render-the-template">
+<h3>Render the template<a class="headerlink" href="#render-the-template" title="Permalink to this headline">¶</a></h3>
+<p>You can use the template tag <a class="reference internal" href="reference/template_tags.html#templatetag-render"><em>critic_render</em></a> to render the template.</p>
+<div class="highlight-django"><div class="highlight"><pre><span class="cp">{%</span> <span class="k">load</span> <span class="nv">critic_tags</span> <span class="cp">%}</span><span class="x"></span>
+
+<span class="cp">{%</span> <span class="k">critic_render</span> <span class="nv">obj</span> <span class="cp">%}</span><span class="x"></span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="retrieve-rating-data-via-urls">
+<h2>Retrieve rating data via urls<a class="headerlink" href="#retrieve-rating-data-via-urls" title="Permalink to this headline">¶</a></h2>
+<p>You can also retrieve the user rating and rating data for an object via a url.
+The output is in JSON format.</p>
+<ul>
+<li><dl class="first docutils">
+<dt>user_rating/<strong>&lt;content_type_id&gt;</strong>/<strong>&lt;object_id&gt;</strong>/</dt>
+<dd><ul class="first last simple">
+<li>Example Output: {&#8220;user_rating&#8221;: 1}</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>data/<strong>&lt;content_type_id&gt;</strong>/<strong>&lt;object_id&gt;</strong>/<strong>&lt;option&gt;</strong>/</dt>
+<dd><ul class="first last simple">
+<li>Example Output: {&#8220;average&#8221;: 3.0, &#8220;total&#8221;: 1, &#8220;average_rounded&#8221;: 3}</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>data/<strong>&lt;content_type_id&gt;</strong>/<strong>&lt;object_id&gt;</strong>/</dt>
+<dd><ul class="first last simple">
+<li>Example Output: {&#8220;average&#8221;: 3.0, &#8220;total&#8221;: 1, &#8220;average_rounded&#8221;: 3}</li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+<div class="section" id="render-via-url">
+<h3>Render via url<a class="headerlink" href="#render-via-url" title="Permalink to this headline">¶</a></h3>
+<p>This will render your template the same way <a class="reference internal" href="reference/template_tags.html#templatetag-render"><em>critic_render</em></a> does</p>
+<ul class="simple">
+<li>render/<strong>&lt;content_type_id&gt;</strong>/<strong>&lt;object_id&gt;</strong>/</li>
+</ul>
+<p><strong>Example</strong></p>
+<p>Using JQuery to load the rating template via ajax</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="nx">$</span><span class="p">(</span><span class="nb">document</span><span class="p">).</span><span class="nx">ready</span><span class="p">(</span><span class="kd">function</span><span class="p">(){</span>
+        <span class="nx">$</span><span class="p">.</span><span class="nx">ajax</span><span class="p">({</span>
+                <span class="nx">url</span><span class="o">:</span><span class="s1">&#39;{% critic_render_url obj2 %}&#39;</span><span class="p">,</span>
+                <span class="nx">success</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">data</span><span class="p">){</span>
+                        <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#box&#39;</span><span class="p">).</span><span class="nx">html</span><span class="p">(</span><span class="nx">data</span><span class="p">);</span>
+                <span class="p">}</span>
+        <span class="p">});</span>
+<span class="p">});</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The template tag <a class="reference internal" href="reference/template_tags.html#templatetag-render-url"><em>critic_render_url</em></a> will retrieve the url
+needed to render the object specified</p>
+</div>
+</div>
+</div>
+<div class="section" id="add-ratings">
+<h2>Add ratings<a class="headerlink" href="#add-ratings" title="Permalink to this headline">¶</a></h2>
+<p>The <cite>add</cite> view expects the following in the request.POST. Is also expects
+a logged in user.</p>
+<ul class="simple">
+<li>content_type_id</li>
+<li>object_id</li>
+<li>option</li>
+</ul>
+<p>You can reverse the add url for form posting.</p>
+<div class="highlight-django"><div class="highlight"><pre><span class="cp">{%</span> <span class="k">url</span> <span class="nv">critic_add_rating</span> <span class="cp">%}</span><span class="x"></span>
+<span class="x">/critic/add/</span>
+</pre></div>
+</div>
+</div>
+</div>
+
+
+          </div> 
+        </div>
+      </div>
+    <div class="footer">
+    <p>
+      &copy; Copyright 2010, The Washington Times.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.0.3.
+	</p>
+    </div>
+      <div class="clearer"></div>
+    </div>
+	<div id="breadcrumbs">
+		Getting Started
+		</ul>
+	</div>
+	<script type="text/javascript" charset="utf-8" src="_static/toc.js"></script>
+  </body>
+</html>

@@ -1,0 +1,253 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>API &mdash; django-critic v0.2.1 documentation</title>
+    <link rel="stylesheet" href="../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '0.2.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="django-critic v0.2.1 documentation" href="../index.html" />
+    <link rel="up" title="Reference" href="index.html" />
+    <link rel="next" title="Template Tags" href="template_tags.html" />
+    <link rel="prev" title="Settings" href="settings.html" /> 
+  </head>
+  <body>
+<div id="docstitle">
+	<p>django-critic v0.2.1 documentation</p>
+</div>
+<div id="header">
+	<div id="title"><h1>API</h1></div>
+	<ul id="headerButtons">
+		<li id="toc_button"><div class="headerButton"><a href="#">Table of Contents</a></div></li>
+		<li id="page_buttons">
+			<div class="headerButton"><a href="../genindex.html" title="General Index" accesskey="I">index</a></div>
+			<div class="headerButton"><a href="template_tags.html" title="Template Tags" accesskey="N">next</a></div>
+			<div class="headerButton"><a href="settings.html" title="Settings" accesskey="P">previous</a></div>
+		</li>
+	</ul>
+</div>
+
+<div id="sphinxsidebar">
+  <div class="sphinxsidebarwrapper">
+	<ul><li class="toctree-l1"><a href="../index.html">Main Page</a></li></ul>
+	<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started.html">Getting Started</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Reference</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="settings.html">Settings</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="">API</a></li>
+<li class="toctree-l2"><a class="reference internal" href="template_tags.html">Template Tags</a></li>
+</ul>
+</li>
+</ul>
+
+    <div id="searchbox" style="display: none">
+      
+        <form class="search" action="../search.html" method="get">
+			<div class="search-wrapper">
+			<span class="search-left"></span>
+			<input class="prettysearch" type="text" name="q" size="18" />
+			<span class="search-right">&nbsp;</span>
+			</div>
+          <input type="submit" value="Search" class="searchbutton" />
+          <input type="hidden" name="check_keywords" value="yes" />
+          <input type="hidden" name="area" value="default" />
+        </form>
+        <p class="searchtip" style="font-size: 90%">
+        Enter search terms or a module, class or function name.
+        </p>
+    </div>
+    <script type="text/javascript">$('#searchbox').show(0);</script>
+  </div>
+</div>
+
+
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="api">
+<span id="id1"></span><h1><a class="toc-backref" href="#id5">API</a><a class="headerlink" href="#api" title="Permalink to this headline">¶</a></h1>
+<div class="contents topic" id="contents">
+<p class="topic-title first">Contents</p>
+<ul class="simple">
+<li><a class="reference internal" href="#api" id="id5">API</a><ul>
+<li><a class="reference internal" href="#rating-manager" id="id6">Rating Manager</a></li>
+<li><a class="reference internal" href="#rating-discriptor" id="id7">Rating Discriptor</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="rating-manager">
+<span id="api-rating-manager"></span><h2><a class="toc-backref" href="#id6">Rating Manager</a><a class="headerlink" href="#rating-manager" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="add">
+<span id="api-manager-add"></span><h3>add<a class="headerlink" href="#add" title="Permalink to this headline">¶</a></h3>
+<p>Arguments expected:</p>
+<ul class="simple">
+<li><strong>obj</strong> - the object instance</li>
+<li><strong>usr</strong> - the authenticated user</li>
+<li><strong>opt</strong> - the option value the user selected.</li>
+</ul>
+<p>Returns:</p>
+<ul class="simple">
+<li>True or False, if the add was successful</li>
+</ul>
+</div>
+<div class="section" id="change">
+<span id="api-manager-change"></span><h3>change<a class="headerlink" href="#change" title="Permalink to this headline">¶</a></h3>
+<p>The <em class="xref std std-ref">api_model_manager_add</em> already handles changes so this method
+is simply here for connivence and it calls the <em class="xref std std-ref">api_model_manager_add</em> method.</p>
+<p>Arguments expected:</p>
+<ul class="simple">
+<li><strong>obj</strong> - the object instance</li>
+<li><strong>usr</strong> - the authenticated user</li>
+<li><strong>opt</strong> - the option value the user selected.</li>
+</ul>
+<p>Returns:</p>
+<ul class="simple">
+<li>True or False, if the change was successful</li>
+</ul>
+</div>
+<div class="section" id="user-rating">
+<span id="api-manager-user-rating"></span><h3>user_rating<a class="headerlink" href="#user-rating" title="Permalink to this headline">¶</a></h3>
+<p>Returns the value the user selected for the supplied object</p>
+<p>Arguments expected:</p>
+<ul class="simple">
+<li><strong>obj</strong> - the object instance</li>
+<li><strong>usr</strong> - the authenticated user</li>
+</ul>
+<p>Returns:</p>
+<ul class="simple">
+<li>Integer - the value the supplied user selected.</li>
+</ul>
+</div>
+<div class="section" id="average">
+<span id="api-manager-average"></span><h3>average<a class="headerlink" href="#average" title="Permalink to this headline">¶</a></h3>
+<p>Returns the average value for the supplied object.</p>
+<p>Arguments expected:</p>
+<ul class="simple">
+<li><strong>obj</strong> - the object instance</li>
+</ul>
+<p>Returns:</p>
+<ul class="simple">
+<li>Number - the average for the supplied object.</li>
+</ul>
+</div>
+<div class="section" id="total">
+<span id="api-manager-total"></span><h3>total<a class="headerlink" href="#total" title="Permalink to this headline">¶</a></h3>
+<p>Returns the total amout of ratings for the supplied object. Optionl argument
+&#8216;opt&#8217; can return the total ratings for a particular option.</p>
+<p>Arguments expected:</p>
+<ul class="simple">
+<li><strong>obj</strong> - the object instance</li>
+<li><strong>opt</strong> - the option value <em>OPTIONAL</em></li>
+</ul>
+<p>Returns:</p>
+<ul class="simple">
+<li>Number - the total about of ratings for the supplied object/option</li>
+</ul>
+</div>
+</div>
+<div class="section" id="rating-discriptor">
+<h2><a class="toc-backref" href="#id7">Rating Discriptor</a><a class="headerlink" href="#rating-discriptor" title="Permalink to this headline">¶</a></h2>
+<p>A descriptor is added a the models that will be rate-able. The descriptor
+returns a manager and works the same as <a class="reference internal" href="#api-rating-manager"><em>Rating Manager</em></a> but does not
+require the object to be passed in.</p>
+<div class="section" id="id2">
+<h3>add<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
+<p>Arguments expected:</p>
+<ul class="simple">
+<li><strong>usr</strong> - the authenticated user</li>
+<li><strong>opt</strong> - the option value the user selected.</li>
+</ul>
+</div>
+<div class="section" id="id3">
+<h3>change<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>
+<p>Arguments expected:</p>
+<ul class="simple">
+<li><strong>usr</strong> - the authenticated user</li>
+<li><strong>opt</strong> - the option value the user selected.</li>
+</ul>
+</div>
+<div class="section" id="id4">
+<h3>user_rating<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><strong>usr</strong> - the authenticated user</li>
+</ul>
+</div>
+<div class="section" id="average-property">
+<h3>average (property)<a class="headerlink" href="#average-property" title="Permalink to this headline">¶</a></h3>
+<p>This takes no arguments and returns the average for the instance</p>
+<p><strong>Example</strong></p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">obj</span><span class="o">.</span><span class="n">ratings</span><span class="o">.</span><span class="n">average</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="mf">3.5</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="total-property">
+<h3>total (property)<a class="headerlink" href="#total-property" title="Permalink to this headline">¶</a></h3>
+<p>This takes no arguments and returns the total for the instance.</p>
+<p><strong>Example</strong></p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">obj</span><span class="o">.</span><span class="n">ratings</span><span class="o">.</span><span class="n">total</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="mi">213</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="data-property">
+<h3>data (property)<a class="headerlink" href="#data-property" title="Permalink to this headline">¶</a></h3>
+<p>This returns detailed information about the rating options for an instance.</p>
+<ul class="simple">
+<li><strong>percentage</strong> - the percentage of a option</li>
+<li><strong>total</strong> - total amount of votes for a option</li>
+</ul>
+<p><strong>Example</strong></p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">p</span> <span class="o">=</span> <span class="n">Product</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">pk</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">p</span><span class="o">.</span><span class="n">ratings</span><span class="o">.</span><span class="n">data</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="p">{</span><span class="s">&#39;1&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s">&#39;percentage&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s">&#39;total&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">},</span>
+<span class="go"> &#39;2&#39;: {&#39;percentage&#39;: 0, &#39;total&#39;: 0},</span>
+<span class="go"> &#39;3&#39;: {&#39;percentage&#39;: 0, &#39;total&#39;: 0},</span>
+<span class="go"> &#39;4&#39;: {&#39;percentage&#39;: 100, &#39;total&#39;: 1},</span>
+<span class="go"> &#39;5&#39;: {&#39;percentage&#39;: 0, &#39;total&#39;: 0}}</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+
+
+          </div> 
+        </div>
+      </div>
+    <div class="footer">
+    <p>
+      &copy; Copyright 2010, The Washington Times.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.0.3.
+	</p>
+    </div>
+      <div class="clearer"></div>
+    </div>
+	<div id="breadcrumbs">
+		<a href="index.html" accesskey="U">Reference</a><img src="../_static/triangle_closed.png" height="9" width="9" alt="&gt;">
+		API
+		</ul>
+	</div>
+	<script type="text/javascript" charset="utf-8" src="../_static/toc.js"></script>
+  </body>
+</html>

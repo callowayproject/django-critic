@@ -1,0 +1,184 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Settings &mdash; django-critic v0.2.1 documentation</title>
+    <link rel="stylesheet" href="../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '0.2.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="django-critic v0.2.1 documentation" href="../index.html" />
+    <link rel="up" title="Reference" href="index.html" />
+    <link rel="next" title="API" href="api.html" />
+    <link rel="prev" title="Reference" href="index.html" /> 
+  </head>
+  <body>
+<div id="docstitle">
+	<p>django-critic v0.2.1 documentation</p>
+</div>
+<div id="header">
+	<div id="title"><h1>Settings</h1></div>
+	<ul id="headerButtons">
+		<li id="toc_button"><div class="headerButton"><a href="#">Table of Contents</a></div></li>
+		<li id="page_buttons">
+			<div class="headerButton"><a href="../genindex.html" title="General Index" accesskey="I">index</a></div>
+			<div class="headerButton"><a href="api.html" title="API" accesskey="N">next</a></div>
+			<div class="headerButton"><a href="index.html" title="Reference" accesskey="P">previous</a></div>
+		</li>
+	</ul>
+</div>
+
+<div id="sphinxsidebar">
+  <div class="sphinxsidebarwrapper">
+	<ul><li class="toctree-l1"><a href="../index.html">Main Page</a></li></ul>
+	<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started.html">Getting Started</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Reference</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="">Settings</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html">API</a></li>
+<li class="toctree-l2"><a class="reference internal" href="template_tags.html">Template Tags</a></li>
+</ul>
+</li>
+</ul>
+
+    <div id="searchbox" style="display: none">
+      
+        <form class="search" action="../search.html" method="get">
+			<div class="search-wrapper">
+			<span class="search-left"></span>
+			<input class="prettysearch" type="text" name="q" size="18" />
+			<span class="search-right">&nbsp;</span>
+			</div>
+          <input type="submit" value="Search" class="searchbutton" />
+          <input type="hidden" name="check_keywords" value="yes" />
+          <input type="hidden" name="area" value="default" />
+        </form>
+        <p class="searchtip" style="font-size: 90%">
+        Enter search terms or a module, class or function name.
+        </p>
+    </div>
+    <script type="text/javascript">$('#searchbox').show(0);</script>
+  </div>
+</div>
+
+
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="settings">
+<span id="id1"></span><h1><a class="toc-backref" href="#id2">Settings</a><a class="headerlink" href="#settings" title="Permalink to this headline">¶</a></h1>
+<div class="contents topic" id="contents">
+<p class="topic-title first">Contents</p>
+<ul class="simple">
+<li><a class="reference internal" href="#settings" id="id2">Settings</a><ul>
+<li><a class="reference internal" href="#critic-rating-methods" id="id3">CRITIC_RATING_METHODS</a></li>
+<li><a class="reference internal" href="#critic-allow-change" id="id4">CRITIC_ALLOW_CHANGE</a></li>
+<li><a class="reference internal" href="#critic-default-render-template" id="id5">CRITIC_DEFAULT_RENDER_TEMPLATE</a></li>
+<li><a class="reference internal" href="#critic-rating-attribute" id="id6">CRITIC_RATING_ATTRIBUTE</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<p>Below is a list of all the settings variables.</p>
+<div class="section" id="critic-rating-methods">
+<span id="setting-rating-methods"></span><h2><a class="toc-backref" href="#id3">CRITIC_RATING_METHODS</a><a class="headerlink" href="#critic-rating-methods" title="Permalink to this headline">¶</a></h2>
+<p>This setting is a list of dictionaries that defines all the properties
+of your rating methods.</p>
+<p>Example:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">CRITIC_RATING_METHODS</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="p">{</span><span class="s">&#39;name&#39;</span><span class="p">:</span> <span class="s">&#39;A Simple Up/Down Rating System&#39;</span><span class="p">,</span>
+         <span class="s">&#39;content_types&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s">&#39;blog.entry&#39;</span><span class="p">],</span>
+         <span class="s">&#39;options&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
+         <span class="s">&#39;allow_change&#39;</span><span class="p">:</span> <span class="bp">True</span>
+        <span class="p">},</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<div class="section" id="module-keys">
+<span id="setting-module-keys"></span><h3>Module Keys<a class="headerlink" href="#module-keys" title="Permalink to this headline">¶</a></h3>
+<ul>
+<li><p class="first"><strong>name</strong> - String, Optional, this is a generic name so you can identify the rating method.</p>
+</li>
+<li><dl class="first docutils">
+<dt><strong>content_types</strong> - this is a list of the models you wish to have be ratable.</dt>
+<dd><ul class="first last simple">
+<li>Format expected is &#8216;app.model&#8217;.</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><p class="first"><strong>options</strong> - This is a list of Integers of all the options a user can select.</p>
+</li>
+<li><dl class="first docutils">
+<dt><strong>allow_change</strong> - True|False, Optional, will allow user to change their rating</dt>
+<dd><ul class="first last simple">
+<li>If not specified <a class="reference internal" href="#setting-allow-change"><em>CRITIC_ALLOW_CHANGE</em></a> will be used.</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt><strong>template</strong> - String, location of the template to use for the content_types.</dt>
+<dd><ul class="first last simple">
+<li>If not specified <a class="reference internal" href="#setting-default-template"><em>CRITIC_DEFAULT_RENDER_TEMPLATE</em></a> will be used.</li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="critic-allow-change">
+<span id="setting-allow-change"></span><h2><a class="toc-backref" href="#id4">CRITIC_ALLOW_CHANGE</a><a class="headerlink" href="#critic-allow-change" title="Permalink to this headline">¶</a></h2>
+<p>True|False, used as a default value to determine if a user can change
+their rating for a object.</p>
+</div>
+<div class="section" id="critic-default-render-template">
+<span id="setting-default-template"></span><h2><a class="toc-backref" href="#id5">CRITIC_DEFAULT_RENDER_TEMPLATE</a><a class="headerlink" href="#critic-default-render-template" title="Permalink to this headline">¶</a></h2>
+<p>The location of the default template. Default location is &#8216;critic/render.html&#8217;</p>
+</div>
+<div class="section" id="critic-rating-attribute">
+<span id="setting-rating-attribute"></span><h2><a class="toc-backref" href="#id6">CRITIC_RATING_ATTRIBUTE</a><a class="headerlink" href="#critic-rating-attribute" title="Permalink to this headline">¶</a></h2>
+<p>The name of the attribute that will be added to the object for easy access
+to the ratings</p>
+</div>
+</div>
+
+
+          </div> 
+        </div>
+      </div>
+    <div class="footer">
+    <p>
+      &copy; Copyright 2010, The Washington Times.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.0.3.
+	</p>
+    </div>
+      <div class="clearer"></div>
+    </div>
+	<div id="breadcrumbs">
+		<a href="index.html" accesskey="U">Reference</a><img src="../_static/triangle_closed.png" height="9" width="9" alt="&gt;">
+		Settings
+		</ul>
+	</div>
+	<script type="text/javascript" charset="utf-8" src="../_static/toc.js"></script>
+  </body>
+</html>
