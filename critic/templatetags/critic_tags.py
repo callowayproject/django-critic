@@ -101,7 +101,7 @@ class RenderURLNode(Node):
         except:
             return ''
             
-        return reverse('rating_render', args=[ctype.pk, obj.pk])
+        return reverse('critic_rating_render', args=[ctype.pk, obj.pk])
     
     
 def do_render_url(parser, token):
