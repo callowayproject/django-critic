@@ -1,5 +1,5 @@
 {% if not user_rating %}
-<form action="/critic/add/" method="get" accept-charset="utf-8">
+<form action="{% url critic_add_rating %}" method="POST">
 	<input type="radio" name="option" value="1" {% ifequal user_rating 1 %}checked{% endifequal %}>1 Star
 	<input type="radio" name="option" value="2" {% ifequal user_rating 2 %}checked{% endifequal %}>2 Stars
 	<input type="radio" name="option" value="3" {% ifequal user_rating 3 %}checked{% endifequal %}>3 Stars
@@ -7,7 +7,7 @@
 	<input type="radio" name="option" value="5" {% ifequal user_rating 5 %}checked{% endifequal %}>5 Stars
 	
 	<input type="hidden" name="content_type_id" value="{{ content_type_id }}">
-	<input type="hidden" name="object_id" value="{{ instance.pk }}">
+	<input type="hidden" name="object_id" value="{{ obj.pk }}">
 	<input type="submit" name="submit" value="GO">
 </form>
 {% endif %}

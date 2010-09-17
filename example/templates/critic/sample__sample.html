@@ -1,13 +1,11 @@
-<form id="{{ obj.pk }}" action="/critic/add/" method="get" accept-charset="utf-8">
+<form action="{% url critic_add_rating %}" method="POST">
 	<select name="option" id="option">
 		<option value="1" {% ifequal user_rating 1 %}selected=True{% endifequal %}>Up</option>
 		<option value="2" {% ifequal user_rating 2 %}selected=True{% endifequal %}>Down</option>
 	</select>
 	<input type="hidden" name="content_type_id" value="{{ content_type_id }}">
-	<input type="hidden" name="object_id" value="{{ instance.pk }}">
+	<input type="hidden" name="object_id" value="{{ obj.pk }}">
 	<input type="submit" name="submit" value="GO">
 </form>
-{% if user_rating %}
-	Average: {{ average }}<br/>
-	Total: {{ total }}
-{% endif %}
+Average: {{ average }}<br/>
+Total: {{ total }}
