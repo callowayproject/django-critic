@@ -10,7 +10,7 @@ You can get django-crtic in a couple ways:
 
 1. Clone the git repository `from here <http://github.com/josesoa/django-critic>`_
 2. Download the latest build `here <http://pypi.python.org/pypi/django-critic/0.2>`_
-3. Use PIP to install from our opensource site pypi 
+3. Use PIP to install
 	* pip install django-critic
 
 
