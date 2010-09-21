@@ -9,4 +9,4 @@ recursive-include docs *.html *.css *.js *.png *.gif
 
 recursive-include critic *.py
 
-exclude example/* example/*/* example/*/*/*
+prune example

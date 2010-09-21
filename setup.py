@@ -10,6 +10,9 @@ try:
         os.path.join(os.path.dirname(__file__),'requirements.txt')).read()
 except (IOError, OSError):
     REQS = ''
+    
+packages = find_packages()
+packages.remove('example')
 
 setup(
     name = 'django-critic',
@@ -18,7 +21,7 @@ setup(
     author = 'Jose Soares',
     author_email = 'jsoares@washingtontimes.com',
     url = 'http://github.com/josesoa/django-critic',
-    packages = ['critic', 'critic.templatetags'],
+    packages = packages,
     include_package_data = True,
     install_requires = REQS,
     classifiers = [
