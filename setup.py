@@ -2,7 +2,7 @@
 Setup file for django-critic
 """
 import os
-from setuptools import setup, find_packages
+from setuptools import setup
 import critic
 
 try:
@@ -10,9 +10,6 @@ try:
         os.path.join(os.path.dirname(__file__),'requirements.txt')).read()
 except (IOError, OSError):
     REQS = ''
-    
-packages = find_packages()
-packages.remove('example')
 
 setup(
     name = 'django-critic',
@@ -21,7 +18,7 @@ setup(
     author = 'Jose Soares',
     author_email = 'jsoares@washingtontimes.com',
     url = 'http://github.com/josesoa/django-critic',
-    packages = packages,
+    packages = ['critic', 'critic.templatetags'],
     include_package_data = True,
     install_requires = REQS,
     classifiers = [
