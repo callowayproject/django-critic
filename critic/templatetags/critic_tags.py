@@ -71,6 +71,9 @@ class RenderNode(Node):
             if user.is_authenticated():
                 extra_context['user_rating'] = RatingData.objects.user_rating(
                     obj, user)
+            # Add csrf_token to form
+            csrf = Variable('csrf_token').resolve(context)
+            extra_context['csrf_token'] = csrf
         except Exception:
             pass
 
